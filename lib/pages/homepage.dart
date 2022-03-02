@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:myapp/classes/language.dart';
 import 'package:myapp/pages/scannedtext.dart';
 
 class HomePage extends StatefulWidget {
@@ -66,12 +67,12 @@ class _HomePageState extends State<HomePage> {
     for (TextBlock block in _recText.blocks) {
       for (TextLine line in block.lines) {
         for (TextElement element in line.elements) {
-          finishedText = finishedText + element.text;
+          finishedText = finishedText + " " + element.text;
         }
         finishedText = finishedText + '\n';
       }
     }
-    // Navigator.of(context).pop();
+    Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => ScannedText(text: finishedText)));
   }

@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(title: 'Language Recognition'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

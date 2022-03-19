@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:myapp/classes/language.dart';
 import 'package:translator/translator.dart';
 
@@ -15,6 +16,7 @@ class _ScannedTextState extends State<ScannedText> {
   String defaultLanguage = 'en';
   var currentLanguage;
   var translatedMessage;
+  bool _readMessage = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +79,8 @@ class _ScannedTextState extends State<ScannedText> {
               actions: [
                 IconButton(
                     onPressed: () {
-                      print('Work in Progress');
+                      _readMessage = !_readMessage;
+                      txtToAudio(currentLanguage);
                     },
                     icon: const Icon(Icons.volume_up)),
                 IconButton(
@@ -89,5 +92,17 @@ class _ScannedTextState extends State<ScannedText> {
             ));
 
     print(translatedMessage);
+  }
+
+  void txtToAudio(language) async {
+    final flutterTts = FlutterTts();
+    if (_readMessage) {
+      await flutterTts.setLanguage(language.langCode);
+      await flutterTts.setSpeechRate(0.5);
+      await flutterTts.setPitch(1.0);
+      await flutterTts.speak(translatedMessage.toString());
+    } else {
+      await flutterTts.stop();
+    }
   }
 }

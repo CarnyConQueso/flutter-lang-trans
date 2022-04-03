@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void textRecognition(String path) async {
+    finishedText = ' ';
     showDialog(
         context: context,
         builder: (_) => const Center(
